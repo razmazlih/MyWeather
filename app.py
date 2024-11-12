@@ -38,8 +38,8 @@ def get_weather(latitude, longitude):
 @app.route('/', methods=['GET'])
 def weather():
     # קבלת כתובת ה-IP של הלקוח
-    # user_ip = request.remote_addr
-    user_ip = "147.235.220.122"
+    user_ip = request.remote_addr
+
     # המרת IP למיקום גיאוגרפי
     city, latitude, longitude = get_location_by_ip(user_ip)
 
