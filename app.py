@@ -1,11 +1,12 @@
 from flask import Flask, request, jsonify
 import requests
 from datetime import datetime
+import os
 
 app = Flask(__name__)
 
 # מפתח ה-API של Tomorrow.io
-TOMORROW_API_KEY = 'YOUR_TOMORROW_API_KEY'  # החלף במפתח ה-API שלך
+TOMORROW_API_KEY = os.getenv('TOMORROW_API_KEY')  # החלף במפתח ה-API שלך
 
 # פונקציה להמרת IP לעיר וקואורדינטות
 def get_location_by_ip(ip_address):
@@ -34,10 +35,11 @@ def get_weather(latitude, longitude):
         print(f"Error retrieving weather data: {e}")
         return None
 
-@app.route('/weather', methods=['GET'])
+@app.route('/', methods=['GET'])
 def weather():
     # קבלת כתובת ה-IP של הלקוח
-    user_ip = request.remote_addr
+    # user_ip = request.remote_addr
+    user_ip = "147.235.220.122"
     # המרת IP למיקום גיאוגרפי
     city, latitude, longitude = get_location_by_ip(user_ip)
 
